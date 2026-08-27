@@ -26,6 +26,7 @@ See [docker/README.md](docker/README.md) and [docs/CONFIGURATION.md](docs/CONFIG
 - Negative expenses are supported for refunds and corrections.
 - PWA support with push notifications.
 - Activity feed with edits and deletions.
+- Bulk import of a group's expenses from a CSV export, mapping columns and categories.
 - Detailed balances per person and per group.
 
 ## UI preview
@@ -52,7 +53,7 @@ Groups are the primary way to use SplitPro. You can invite friends by email, or 
 
 ### 4) Data utilities
 
-Splitwise import supports friends and groups (partial import). Expenses themselves are not imported yet. You can export data from the balances view and account settings.
+Splitwise import supports friends and groups (partial import); Splitwise expenses themselves are not imported yet. A group's expenses can be bulk imported from a CSV export, such as a monthly statement from a bank or a personal finance app. Columns are detected from the header row, the file's own categories are matched onto SplitPro's, and rows carrying the opposite sign are imported as money received. See [docs/CSV_IMPORT.md](docs/CSV_IMPORT.md). You can export data from the balances view and account settings.
 
 ### 5) Translations
 
@@ -95,6 +96,7 @@ Bank integration allows you to load transactions from providers like Plaid and c
 - [docs/CURRENCY_CONVERSIONS.md](docs/CURRENCY_CONVERSIONS.md)
 - [docs/RECURRING_TRANSACTIONS.md](docs/RECURRING_TRANSACTIONS.md)
 - [docs/BANK_TRANSACTIONS.md](docs/BANK_TRANSACTIONS.md)
+- [docs/CSV_IMPORT.md](docs/CSV_IMPORT.md)
 - [docker/README.md](docker/README.md)
 
 ## Versions

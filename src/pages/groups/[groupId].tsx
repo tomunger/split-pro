@@ -5,6 +5,7 @@ import {
   Check,
   ChevronLeft,
   DoorOpen,
+  FileUp,
   Info,
   Merge,
   PlusIcon,
@@ -381,6 +382,13 @@ const BalancePage: NextPageWithUser<{
               <div className="mt-8">
                 <p className="font-semibold">{t('group_details.group_info.actions')}</p>
                 <div className="child:h-7 mt-2 flex flex-col gap-4">
+                  {!isArchived && (
+                    <Link href={`/groups/${groupId}/import`}>
+                      <Button variant="ghost" className="justify-start p-0 text-left">
+                        <FileUp className="mr-2 size-4" /> {t('group_details.import_csv.title')}
+                      </Button>
+                    </Link>
+                  )}
                   <Label className="flex cursor-pointer items-center justify-between">
                     <p className="flex items-center">
                       <Merge className="mr-2 size-4" />{' '}

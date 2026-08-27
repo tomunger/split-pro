@@ -312,6 +312,45 @@
       "title": "Group statistics",
       "total_expenses": "Total expenses"
     },
+    "import_csv": {
+      "title": "Import expenses from CSV",
+      "note": "Every row becomes an expense split equally between all group members, filed under General so you can categorise it later.",
+      "choose_file": "Choose file",
+      "no_file_chosen": "No file chosen",
+      "columns": "Columns",
+      "column_date": "Date",
+      "column_description": "Description",
+      "column_description_hint": "Tick one or more columns. They are joined in order, and blank ones are skipped.",
+      "column_amount": "Amount",
+      "column_category": "Category",
+      "column_unmapped": "Not mapped",
+      "options": "Options",
+      "amount_sign": "Amount sign",
+      "amount_sign_options": {
+        "expenses_negative": "Expenses are negative",
+        "expenses_positive": "Expenses are positive"
+      },
+      "date_format": "Date format",
+      "paid_by": "Paid by",
+      "currency": "Currency",
+      "preview": "Preview",
+      "selected": "{{selected}} of {{total}} selected",
+      "received": "Received",
+      "already_in_group": "Already in group",
+      "no_name": "No description",
+      "importing": "Imported {{done}} of {{total}}",
+      "row_errors": {
+        "invalid_date": "Unreadable date",
+        "invalid_amount": "Unreadable amount",
+        "zero_amount": "Zero amount",
+        "missing_name": "Missing description"
+      },
+      "messages": {
+        "import_success": "Imported {{count}} expenses",
+        "import_partial": "Imported {{count}} expenses before the import failed",
+        "no_rows_found": "That file has no rows below the header"
+      }
+    },
     "messages": {
       "default_split_cleared": "Default split cleared",
       "default_split_updated": "Default split updated",
