@@ -243,6 +243,31 @@ describe('parseRows', () => {
     expect(parsed?.error).toBe('invalid_amount');
   });
 
+  it('should flag an amount with a letter in it instead of dropping the letter', () => {
+    // `O` typed for `0`: sanitising alone would read this as 1.00.
+    const [parsed] = parseAmounts([row('7/27/26', 'Shop', '-1O.00')], 'expenses_negative');
+
+    expect(parsed?.error).toBe('invalid_amount');
+  });
+
+  it('should flag an amount with stray characters in it', () => {
+    const [parsed] = parseAmounts([row('7/27/26', 'Shop', '-12abc34.56')], 'expenses_negative');
+
+    expect(parsed?.error).toBe('invalid_amount');
+  });
+
+  it("should accept the selected currency's code", () => {
+    const [parsed] = parseAmounts([row('7/27/26', 'Shop', 'USD -12.00')], 'expenses_negative');
+
+    expect(parsed).toMatchObject({ amount: 1200n, error: undefined });
+  });
+
+  it('should accept a currency symbol after the number', () => {
+    const [parsed] = parseAmounts([row('7/27/26', 'Shop', '-118.24 €')], 'expenses_negative');
+
+    expect(parsed).toMatchObject({ amount: 11824n, error: undefined });
+  });
+
   it('should flag a zero amount', () => {
     const [parsed] = parseAmounts([row('7/27/26', 'Shop', '$0.00')], 'expenses_negative');
 

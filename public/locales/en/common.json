@@ -314,7 +314,7 @@
     },
     "import_csv": {
       "title": "Import expenses from CSV",
-      "note": "Every row becomes an expense split equally between all group members, filed under General so you can categorise it later.",
+      "note": "Every row becomes an expense split equally between all group members.  An attempt to map the incoming category is made and non-matches default to the General category.",
       "choose_file": "Choose file",
       "no_file_chosen": "No file chosen",
       "columns": "Columns",
@@ -338,6 +338,7 @@
       "received": "Received",
       "already_in_group": "Already in group",
       "no_name": "No description",
+      "select_row": "Import line {{line}}: {{name}}",
       "importing": "Imported {{done}} of {{total}}",
       "row_errors": {
         "invalid_date": "Unreadable date",
@@ -348,7 +349,8 @@
       "messages": {
         "import_success": "Imported {{count}} expenses",
         "import_partial": "Imported {{count}} expenses before the import failed",
-        "no_rows_found": "That file has no rows below the header"
+        "no_rows_found": "That file has no rows below the header",
+        "duplicates_unavailable": "Could not load this group's expenses to check for duplicates. Reload to try again."
       }
     },
     "messages": {

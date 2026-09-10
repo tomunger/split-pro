@@ -383,11 +383,11 @@ const BalancePage: NextPageWithUser<{
                 <p className="font-semibold">{t('group_details.group_info.actions')}</p>
                 <div className="child:h-7 mt-2 flex flex-col gap-4">
                   {!isArchived && (
-                    <Link href={`/groups/${groupId}/import`}>
-                      <Button variant="ghost" className="justify-start p-0 text-left">
+                    <Button asChild variant="ghost" className="justify-start p-0 text-left">
+                      <Link href={`/groups/${groupId}/import`}>
                         <FileUp className="mr-2 size-4" /> {t('group_details.import_csv.title')}
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   )}
                   <Label className="flex cursor-pointer items-center justify-between">
                     <p className="flex items-center">

@@ -59,6 +59,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  // Archived groups reject new expenses, so send them to the group page, which explains why.
+  if (group.archivedAt) {
+    return {
+      redirect: {
+        destination: `/groups/${group.id}`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       ...(await customServerSideTranslations(context.locale, ['common', 'currencies'])),

@@ -25,7 +25,8 @@ be edited or deleted individually.
 
 ## Columns
 
-Only these columns are used; everything else in the file is ignored. Category is optional.
+Columns are mapped into SplitPro's Date, Description, and Amount. The import operation attempts
+to recognize the appropriate columns.
 
 | Role                      | Recognised header names                                                                         |
 | ------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -110,6 +111,9 @@ labelled `Already in group` and start unselected. This is advisory — you can s
 Currency symbols and thousands separators are stripped, so `-$1,234.56` reads correctly. Numbers are
 interpreted using the **separators of your app language**: with English selected, `1.234,56` is not
 read as 1234.56. The preview shows the parsed value, so a mismatch is visible before importing.
+
+Any other character makes the amount unreadable, so a typo like `1O.00` is flagged rather than
+imported as 1.00. The selected currency's code is allowed, as in `USD 12.00`.
 
 Accounting-style parentheses for negatives (`(118.24)`) are not recognised as a sign; such a value
 reads as positive. Export plain signed numbers instead.

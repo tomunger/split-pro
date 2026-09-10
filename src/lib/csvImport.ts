@@ -205,15 +205,30 @@ const readDescription = (row: string[], indices: number[]): string =>
     .filter((part) => '' !== part)
     .join(DESCRIPTION_SEPARATOR);
 
-const rowError = ({
-  raw,
-  date,
-  amount,
-}: Omit<ParsedRow, 'lineNumber' | 'error'>): CsvRowError | undefined => {
+/**
+ * Characters a readable amount may contain once the selected currency's code is removed:
+ * digits, signs, whitespace, separators, parentheses and currency symbols.
+ */
+const AMOUNT_CHARACTERS = /^[\d\s+.,'()\p{Sc}-]+$/u;
+
+/**
+ * Sanitising keeps only digits and separators, so without this check a typo like `1O.00`
+ * would import as 1.00 instead of being flagged. The selected currency's code is allowed
+ * because some exports write amounts as `USD 12.00`.
+ */
+const isReadableAmount = (value: string, currency: string): boolean => {
+  const withoutCode = value.toUpperCase().split(currency.toUpperCase()).join('');
+  return /\d/.test(withoutCode) && AMOUNT_CHARACTERS.test(withoutCode);
+};
+
+const rowError = (
+  { raw, date, amount }: Omit<ParsedRow, 'lineNumber' | 'error'>,
+  currency: string,
+): CsvRowError | undefined => {
   if (!date) {
     return 'invalid_date';
   }
-  if (!/\d/.test(raw.amount)) {
+  if (!isReadableAmount(raw.amount, currency)) {
     return 'invalid_amount';
   }
   if (0n === amount) {
@@ -268,7 +283,7 @@ export const parseRows = ({
       amount,
       category: matchCategory(raw.category),
       raw,
-      error: rowError({ raw, date, name: raw.description, amount, category: '' }),
+      error: rowError({ raw, date, name: raw.description, amount, category: '' }, currency),
     };
   });
 };
